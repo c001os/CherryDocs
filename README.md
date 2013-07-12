@@ -1,0 +1,4 @@
+CherryDocs
+==========
+
+Cherry Templates Documentation
