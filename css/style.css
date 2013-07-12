@@ -636,6 +636,32 @@ footer {
 .flex-control-nav li {
   text-indent: -1000px;
 }
+.margbot {
+  margin-bottom: 30px;
+}
+.pretty_image {
+  position: relative;
+}
+.pretty_image i {
+  display: block;
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  margin-left: -15px;
+  opacity: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  color: #0179c6;
+}
+.pretty_image:hover i {
+  top: 40%;
+  opacity: 0.9;
+}
 /*======================= SCROLL TO TOP =======================*/
 #back-top {
   position: fixed;
