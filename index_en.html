@@ -15,130 +15,10 @@
   <script src="js/prettify.js"></script>
   <script src="js/jquery.flexslider.js"></script>
   <script src="js/bootstrap-affix.js"></script>
+  <script src="js/script.js"></script>
   <script type="text/javascript" src="js/jquery.prettyPhoto.js"></script> 
   <link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
   <script type="text/javascript" src="google-code-prettify/prettify.js"></script>
-  
-  <script>    
-    $(document).ready(function() {	
-  		$('.flexslider').flexslider({
-  		  animation: "fade",      
-  		  slideshow: false,     
-  		  slideshowSpeed: 7000,
-  		  animationDuration: 0,
-  		  prevText: "",
-  		  nextText: "",
-  		  controlNav: true,
-  		}) 		
-
-
-
-// hide #back-top first
-  $("#back-top").hide();
-  
-  // fade in #back-top
-  $(function () {
-    $(window).scroll(function () {
-      if ($(this).scrollTop() > 100) {
-        $('#back-top').fadeIn();
-      } else {
-        $('#back-top').fadeOut();
-      }
-    });
-
-    // scroll body to 0px on click
-    $('#back-top a').click(function () {
-      $('body,html').animate({
-        scrollTop: 0
-      }, 400);
-      return false;
-    });
-  });	
-			
-
-// prettyphoto init
-        $("a[data-gal^='prettyPhoto']").prettyPhoto({
-          animationSpeed:'slow',
-          theme:'facebook',
-          slideshow:false,
-          autoplay_slideshow: false,
-          show_title: true,
-          overlay_gallery: false
-        }).append('<span></span>').hover(
-          function(){
-            $(this).find('>img').stop().animate({opacity:.5})
-          },
-          function(){
-            $(this).find('>img').stop().animate({opacity:1})
-          }
-        );		
-
-// slide-down-box-------------------------------  
-      var idArray = [],
-          click_scroll = false;
-      $("#nav a").each(function(index){
-        idArray[index]=$(this).attr("href");
-      });
-      
-      $('ul.list li a').prepend('<i class="icon-sample"></i>');
-      $('li:first-child', "#nav").addClass('first');
-      $('li:last-child', "#nav").addClass('last');
-
-      $("#affect_all").toggle(
-        function(){
-          $("#nav>li").not(".act_item").addClass("open_item").find("dd").stop(true).slideDown(200);
-          $(this).find('.expand').hide();
-          $(this).find('.close').show();
-        },
-        function(){
-          $("#nav>li").not(".act_item").removeClass("open_item").find("dd").stop(true).slideUp(200);
-          $(this).find('.expand').show();
-          $(this).find('.close').hide();
-        }
-      );
-      $(".slide-down dt i").click(function(){
-        $(this).parents("li").toggleClass("open_item").find('dd').slideToggle(300);
-        return false;
-      });
-      $(".slide-down a").click(function(){
-        click_scroll = true;
-        $(window).scrollTo($(this).attr("href"), 800, function(){
-          click_scroll = false;
-          change_menu_item();
-        });
-        return false;
-      });
-      $(window).scroll(change_menu_item).trigger("scroll");
-      function change_menu_item(){
-        if(!click_scroll){
-          $(".current").removeClass("current");
-          $(".act_item").removeClass("act_item");
-          $(".open_item").removeClass("open_item");
-          for(var i=0, lenghtArray = idArray.length; i<lenghtArray; i++){
-            if($(idArray[i]).offset().top-$(window).scrollTop()<=(($(window).height()/2)-100) && $(idArray[i]).offset().top-$(window).scrollTop()>=0 || $(window).scrollTop()+(($(window).height()/2)-100)>$(idArray[i]).offset().top && $(idArray[i]).offset().top+$(idArray[i]).height()>$(window).scrollTop()+(($(window).height()/2))){
-              $("a[href="+idArray[i]+"]").parent("li").addClass("current");
-              $("a[href="+idArray[i]+"]").parents("li").addClass("act_item open_item");
-            }
-          }
-          $(".act_item").find("dd").slideDown(200);
-          $("li", '#nav').not(".act_item").find("dd").stop().slideUp(200);
-        }
-      }
-    })  
-    !function ($) {
-      $(function(){	
-        var $window = $(window)		
-        // make code pretty
-        window.prettyPrint && prettyPrint()
-        // side bar
-        $('#nav_container').affix({
-          offset: {
-            top: 80		
-          }
-        })
-      })
-    }(window.jQuery)  
-  </script>    
 
     <!--[if lt IE 8]>
   		<div style='text-align:center'>
@@ -157,10 +37,23 @@
 <header class="header">
   <div class="container">
   <div class="row">
-  <article class="span4"><a class="brand" href="http://templatemonster.com" target="_blank"></a></article>
- <article class="span8">
+  <article class="span3"><a class="brand" href="http://templatemonster.com" target="_blank"></a></article>
+ <article class="span7">
  <h1><img alt="" src="img/wordpress_logo.png"> WordPress Documentation</h1>
+  </article> 
+  <!-- languages switcher
+   <article class="span2">
+    <div class="languages pull-right">
+      <span class="lang_label">Language: </span><div id="lang_icon"><b>En</b><i class="icon-angle-down"></i></div>
+      <ul id="lang_list">
+        <li class="active"><a href="index_en.html"><span>English </span><img src="img/flags/gb.png" height="14" width="22" alt="en"></a></li>
+        <li><a href="index_es.html"><span>Español </span><img src="img/flags/es.png" height="14" width="22" alt="es"></a></li>
+        <li><a href="index_de.html"><span>Deutsch </span><img src="img/flags/de.png" height="14" width="22" alt="de"></a></li>
+        <li><a href="index_ru.html"><span>Русский </span><img src="img/flags/ru.png" height="14" width="22" alt="ru"></a></li>
+      </ul>
+    </div>
   </article>   
+   -->   
   </div>  	
   </div>
 </header>
@@ -1281,23 +1174,15 @@
         <div class="span6"><pre class="prettyprint">[check_list] List here ... [/check_list] </pre></div>
         <div class="span6"><p><span class="label">Description:</span> shortcodes set used to display various lists stylizations. Each shortcode implements it's own marker for the list items.</p></div>
       </div>
-      <br>
-      <h5>Audio</h5>
-      <figure class="img-paraloid"><img src="img/wordpress/shortcode_audio.jpg" alt=""></figure>
-      <div class="row-fluid">
-        <div class="span6"><pre class="prettyprint">[audio type="mp3" file="#" title="Title"]</pre></div>
-        <div class="span6"><p><span class="label">Description:</span> used to insert audio content.</p></div>
-      </div>
-      <br>
-      <h5>Video</h5>
-      <figure class="img-paraloid"><img src="img/wordpress/shortcode_video.jpg" alt=""></figure>
-      <div class="row-fluid">
-        <div class="span6"><pre class="prettyprint">[video m4v="#" ogv="#" width="400" height="300"]</pre></div>
-        <div class="span6"><p><span class="label">Description:</span> used to insert video content, which can be loaded from the off-site services (youtube, vimeo) or from your website (self hosted).</p></div>
-      </div>
     </article>
     <article id="other_shortcodes">
       <h4>Other</h4>
+      <h5>Video Preview</h5>
+      <figure class="img-paraloid"><img src="img/wordpress/shortcode_video_preview.jpg" alt=""></figure>
+      <div class="row-fluid">
+        <div class="span6"><pre class="prettyprint">[video_preview post_url="http://demolink.org/blog/video-post-type/" title="yes" date="yes" author="yes"]</pre></div>
+        <div class="span6"><p><span class="label">Description:</span> used to insert video preview, which can be loaded from the off-site services (youtube, vimeo) or from your website (self hosted).</p></div>
+      </div>
       <h5>Alert Boxes (message, info, success, danger)</h5>
       <figure class="img-paraloid"><img src="img/wordpress/shortcode_alert.jpg" alt=""></figure>
       <div class="row-fluid">
@@ -1354,10 +1239,37 @@
         <div class="span6"><pre class="prettyprint">[map src="#" width="300" height="200"]  </pre></div>
         <div class="span6"><p><span class="label">Description:</span> used to display Google maps. To make the shortcode work, you need to insert the desired location link from <a href="https://maps.google.com/">Google</a></div>
       </div>
-    </article>
-
-      <br>
-      <p>Feel free to check out the following tutorial on how <a href="http://www.templatemonster.com/help/wordpress-how-to-insert-google-map-using-shortcode.html" target="_blank">to insert Google map using shortcode</a>.</p>
+       <br>
+    <h5>Audio / Video</h5>
+    <p><span class="label">Description:</span> WordPress 3.6 has great support for embedding YouTube and Vimeo videos, but if you wanted to play a video or audio file, like an MP3 or MP4 file, that has been uploaded to a server, you needed to implement some kind of player so that the file would appear as media rather than a link on your site. <a href="http://make.wordpress.org/core/2013/04/08/audio-video-support-in-core/" target="_blank">Read More</a></p>
+    The process is similar to inserting an image into your post content:
+    <ol class="clearfix">
+      <li>Add or edit a page or post</li>
+      <li>
+        <p>Click in your content where you want the player to appear then hit <strong style="color:#666">Add Media</strong> above the content editor</p>
+        <figure class="img-paraloid pull-left"><img src="img/audio_video_1.jpg" height="35" width="107" alt=""></figure>
+        <div class="clear"></div>
+      </li>
+      <li>Click <strong>Upload Files</strong></li>
+      <li>Upload an audio or video file</li>
+      <li>
+        <p>Make sure the file you uploaded is selected then under <em>Attachment Display Settings</em> set <em>Embed or Link</em> to &quot;Embed Media Player&quot;</p>
+        <figure class="img-paraloid pull-left"><img src="img/audio_video_2.jpg" height="92" width="268" alt=""></figure>
+        <div class="clear"></div>
+      </li>
+      <li>Click <strong>Insert into page</strong></li>
+    </ol>
+    <p>WordPress will have inserted a shortcode for your audio or video that will be replaced with the player.</p>
+    <p>Maybe you uploaded an audio or video file to another server, say Amazon S3 or a file hosting service. Just enter the URL to your media file (unlinked) on a line of its own. For example, you want to embed a YouTube video. Simply paste that into your content on a line of its own and the YouTube player will show in its place when you publish. Be sure that the URL is not linked.</p>
+    <div class="row-fluid">
+      <div class="span6">
+        <pre class="prettyprint prettyprinted">http://www.youtube.com/watch?v=mmRPSoDrrFU</pre>
+      </div>
+      <div class="span6">
+        <p>That simple line above becomes this:</p>
+        <iframe width="390" height="260" src="http://www.youtube.com/embed/2kodXWejuy0" frameborder="0" allowfullscreen=""></iframe>
+      </div>
+    </div>
     </article>
   </section>  
 <!-- Shortcodes end --> 
